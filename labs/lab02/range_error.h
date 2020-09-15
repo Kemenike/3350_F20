@@ -23,17 +23,19 @@ class RangeError {
        << err.fileName
        << ", lineno: " << err.lineNumber
        << ", index: " << err.value
+       << ", function name: " << err.funcName
        << endl;
        return os;
   }
 
   public:
 
-    RangeError( const char *fn, int line, int subscr )
+    RangeError( const char *fn, int line, int subscr, string __func__ )
     {
       strcpy(fileName, fn);
       lineNumber = line;
       value = subscr;
+      funcName = __func__;
     }
    
     // a standard method for all range error classes  -- returns error type
@@ -45,7 +47,8 @@ class RangeError {
   private:
     char fileName [FileNameSize + 1];   // __FILE__
     int lineNumber;                     // __LINE__
-    int value;                          // the out-of-range index 
+    int value;                          // the out-of-range index
+    string funcName;
 };
 
 #endif

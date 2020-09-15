@@ -7,13 +7,14 @@
  * note:  rand and time are part of the runtime environment of gnu C++ v.3--
  * no need to include time.h and stdlib.h 
  */ 
-
+#include <fstream>
 #include <iostream>
 #include "list.h"
 #include <stdlib.h>
 #include <time.h>
 
 using namespace std;
+
 
 int main(int argc, char *argv[], char *env[]) {
 
@@ -64,6 +65,15 @@ int main(int argc, char *argv[], char *env[]) {
   cout << fList2;
   fList2 = fList;
   cout << fList2;
+
+  //Kanayo's Modifications
+  ofstream outf("log.txt");
+  if (!outf.is_open()) {
+    cout << "Log file was not opened.\n";
+  } else {
+  streambuf *buf = cerr.rdbuf();
+  cerr.rdbuf(outf.rdbuf());
+  }
  
   try {
     cout << endl << "Testing range error conditions: swap(-1,size-1)\n";

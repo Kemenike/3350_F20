@@ -52,7 +52,7 @@ void List<T>::add(const T &value) {
   // surround the out-of-bounds check in a try block
   try {
     if (size >= MAX)
-        throw RangeError (__FILE__, __LINE__, size);
+        throw RangeError (__FILE__, __LINE__, size, __func__);
   }
   // catch block for RangError
   catch (const RangeError &err) {
@@ -100,7 +100,7 @@ void List<T>::swap(int i, int j) {
 
   try {
     if (i < 0 || i >= size || j < 0 || j >= size) {
-      throw RangeError (__FILE__,__LINE__, j);
+      throw RangeError (__FILE__,__LINE__, j, __func__);
     }
   }
   catch (const RangeError &err) {
@@ -120,7 +120,7 @@ int List<T>::max(int i,int j) {
 
   try {
     if (i < 0 || i >= size || j < 0 || j >= size)
-      throw RangeError (__FILE__,__LINE__, size);
+      throw RangeError (__FILE__,__LINE__, size, __func__);
   }
   catch (const RangeError &R)
   {
