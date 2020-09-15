@@ -1,4 +1,5 @@
 /* lab02.cpp
+ * modified by: Kanayo Emenike
  * programmer:  santa claus 
  * assignment:  lab02 cs 3500
  * description: instantiates a template class List object; tests all methods; 
@@ -6,7 +7,7 @@
  * 
  * note:  rand and time are part of the runtime environment of gnu C++ v.3--
  * no need to include time.h and stdlib.h 
- */ 
+*/ 
 #include <fstream>
 #include <iostream>
 #include "list.h"

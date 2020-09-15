@@ -1,0 +1,2 @@
+RangeError exception thrown, file: list.h, lineno: 103, index: 9, function name: swap
+RangeError caught in swap, file: lab02.cpp, line: 87

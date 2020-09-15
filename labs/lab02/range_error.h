@@ -30,12 +30,12 @@ class RangeError {
 
   public:
 
-    RangeError( const char *fn, int line, int subscr, string __func__ )
+    RangeError( const char *fn, int line, int subscr, string fnName )
     {
       strcpy(fileName, fn);
       lineNumber = line;
       value = subscr;
-      funcName = __func__;
+      funcName = fnName;
     }
    
     // a standard method for all range error classes  -- returns error type
