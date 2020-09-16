@@ -1,2 +1,7 @@
-RangeError exception thrown, file: list.h, lineno: 103, index: 9, function name: swap
-RangeError caught in swap, file: lab02.cpp, line: 87
+RangeError caught in add, file lab02.cpp , lineno: 57 in function main
+RangeError exception thrown, file: list.h, lineno: 103, index: 11, function name: swap
+RangeError caught in swap, file lab02.cpp , lineno: 74 in function main
+RangeError exception thrown, file: list.h, lineno: 123, index: 10, function name: max
+RangeError caught in max, file lab02.cpp , lineno: 84 in function main
+RangeError exception thrown, file: list.h, lineno: 103, index: 11, function name: swap
+RangeError caught in swap, file: lab02.cpp, line: 101

@@ -37,12 +37,25 @@ int main(int argc, char *argv[], char *env[]) {
   List<int> iList;
   List<double> fList;
 
-  // fill the lists with random numbers - size is read from cmdline  
-  for (int i = 0; i < size; i++) {
-    iList.add(rand() % 51 + 1); 
-    fList.add((rand() % 51 + 7)/3.0); 
-  }  
+  // Re-routing cerr
+  ofstream outf ("log.txt");
+  if (!outf.is_open()) {
+      cout << "Log file was not opened.\n";
+  } else {
+      streambuf *buf = cerr.rdbuf();
+      cerr.rdbuf(outf.rdbuf());
+  }
 
+  // fill the lists with random numbers - size is read from cmdline  
+  try {
+    for (int i = 0; i < size; i++) {
+        iList.add(rand() % 51 + 1); 
+        fList.add((rand() % 51 + 7)/3.0);
+    }  
+  }
+  catch (const RangeError &err){
+      cerr << "RangeError caught in add, file " << __FILE__ << " , lineno: " << __LINE__ << " in function " << __func__ << endl;
+  }
   /* sort and display lists */  
   sz = iList.getSize();
   iList.sort();
@@ -54,12 +67,22 @@ int main(int argc, char *argv[], char *env[]) {
 
   // this will trigger an exception from C++ stdexcept if size > 10
   cout << "Swap first and last elements in fList" << endl;
-  fList.swap(0,(size-1)); /* swap element 0 with element size-1 */  
+  try {
+      fList.swap(0,(size-1)); /* swap element 0 with element size-1 */  
+  }
+  catch (const RangeError &err) {
+      cerr << "RangeError caught in swap, file " << __FILE__ << " , lineno: " << __LINE__ << " in function " << __func__ << endl;
+  }
   cout << fList;
 
   // this will trigger a Range Error exception if size > 10
+  try {
   cout << "The element at pos " << fList.max(0,(size-1)) << 
   " is larger than the element at pos " << (size-1) << " in fList "<< endl;
+  }
+  catch (const RangeError &err) {
+      cerr << "RangeError caught in max, file " << __FILE__ << " , lineno: " << __LINE__ << " in function " << __func__ << endl;
+  }
 
   cout << "Testing implicit copy constructor and assignment operator.\n";
   List<double> fList2(fList);
@@ -67,15 +90,6 @@ int main(int argc, char *argv[], char *env[]) {
   fList2 = fList;
   cout << fList2;
 
-  //Kanayo's Modifications
-  ofstream outf("log.txt");
-  if (!outf.is_open()) {
-    cout << "Log file was not opened.\n";
-  } else {
-  streambuf *buf = cerr.rdbuf();
-  cerr.rdbuf(outf.rdbuf());
-  }
- 
   try {
     cout << endl << "Testing range error conditions: swap(-1,size-1)\n";
     fList.swap(-1,size-1);
@@ -95,6 +109,5 @@ int main(int argc, char *argv[], char *env[]) {
 
   cout << "Testing code after catch, file "<< __FILE__ <<  ", line "<< __LINE__ 
   << endl;
-  
   return 0;
 }
